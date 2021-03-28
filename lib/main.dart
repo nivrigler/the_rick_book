@@ -50,16 +50,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  Future<Character> futureCharacter;
-
-  @override
-  void initState() {
-    super.initState();
-    futureCharacter = fetchCharacter();
-    futureCharacter.then((erg) {
-      print(erg);
-    });
-  }
+  String nameOfCharacter = "None";
 
   void _incrementCounter() {
     setState(() {
@@ -69,6 +60,13 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
+
+      var futureCharacter = fetchCharacter(_counter);
+      futureCharacter.then((character) {
+        setState(() {
+          nameOfCharacter = character.name;
+        });
+      });
     });
   }
 
@@ -107,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'You have pushed the button this many times:',
+              'Name of current character: $nameOfCharacter',
             ),
             Text(
               '$_counter',

@@ -3,8 +3,8 @@ import 'package:http/http.dart' as http;
 import 'character.dart';
 
 
-Future<Character> fetchCharacter() async {
-  final response = await http.get(Uri.https('rickandmortyapi.com\/api', 'character\/1'));
+Future<Character> fetchCharacter(int characterId) async {
+  final response = await http.get(Uri.https('rickandmortyapi.com', 'api/character/$characterId'));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
