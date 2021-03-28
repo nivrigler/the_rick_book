@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:the_rick_book/api/character.dart';
+
+import 'api/fetch.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -45,6 +50,16 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  Future<Character> futureCharacter;
+
+  @override
+  void initState() {
+    super.initState();
+    futureCharacter = fetchCharacter();
+    futureCharacter.then((erg) {
+      print(erg);
+    });
+  }
 
   void _incrementCounter() {
     setState(() {
