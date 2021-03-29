@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:the_rick_book/api/character.dart';
+import 'package:the_rick_book/screens/FirstScreen.dart';
+import 'package:the_rick_book/screens/SecondScreen.dart';
+import 'package:the_rick_book/screens/ThirdScreen.dart';
 
 import 'api/fetch.dart';
 
@@ -25,7 +28,28 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+          bottom: TabBar(
+            tabs: [
+              Tab(icon: Icon(Icons.person), text: 'By Character',),
+              Tab(icon: Icon(Icons.location_searching),text: 'By Location',),
+              Tab(icon: Icon(Icons.video_library),text: 'By Episode',),
+            ]
+          ),
+        ),
+        body: TabBarView(
+          children: <Widget>[
+            FirstScreen(),
+            SecondScreen(),
+            ThirdScreen()
+          ],
+        ),
+        ),
+        
+      ),
     );
   }
 }
